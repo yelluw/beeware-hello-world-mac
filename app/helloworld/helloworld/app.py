@@ -1,12 +1,16 @@
 import toga
+import requests
 
 
 class Converter(toga.App):
     def calculate(self, widget):
-        try:
-            self.c_input.value = (float(self.f_input.value) - 32.0) * 5.0 / 9.0
-        except Exception:
-            self.c_input.value = '???'
+        # try:
+        #     self.c_input.value = (float(self.f_input.value) - 32.0) * 5.0 / 9.0
+        # except Exception:
+        #     self.c_input.value = '???'  
+        url = 'https://dweet.io/get/latest/dweet/for/aquaponie'
+        response = requests.get(url)
+        self.c_input.value = response.json()
 
     def startup(self):
         self.main_window = toga.MainWindow(self.name)
